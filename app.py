@@ -31,14 +31,14 @@ baseline_survival = 0.99600731958437
 risk = 1 - (baseline_survival ** np.exp(pi))
 risk_pct = round(100 * risk, 1)
 
-# Classify
-if risk < 5:
+# Classify based on percentage
+if risk_pct < 5:
     risk_class = "Class 1: Low risk (<5%)"
     class_color = "🟢"
-elif risk < 20:
+elif risk_pct < 20:
     risk_class = "Class 2: Mid-low risk (5–20%)"
     class_color = "🟡"
-elif risk < 40:
+elif risk_pct < 40:
     risk_class = "Class 3: Mid-high risk (20–40%)"
     class_color = "🟠"
 else:
@@ -48,7 +48,6 @@ else:
 # Output
 st.markdown("### Results")
 st.metric(label="Estimated 5-year risk of MAE", value=f"{risk_pct}%", delta=risk_class)
-
 st.markdown(f"**Risk Class:** {class_color} {risk_class}")
 
 # Graph
